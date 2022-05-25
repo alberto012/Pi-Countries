@@ -34,7 +34,6 @@ router.get("/", async (req, res) => {
         const {name} = req.query;
         if( name ) {
             let infoFiltrada = dataBase.filter( elemento => elemento.name === name)
-
             res.status(200).json(infoFiltrada);
         }
 
@@ -43,4 +42,16 @@ router.get("/", async (req, res) => {
         console.log(error);
     }});
 
+
+    
+router.use("/:id", async(req, res) => {
+    const {id}= req.params;
+    const dataCountries = await Country.findAll();
+    
+    if (id){
+        const nameFilter= dataCountries.filter(e=>e.id==id)
+  
+        res.status(200).json(nameFilter);
+    }
+})
 module.exports = router;
