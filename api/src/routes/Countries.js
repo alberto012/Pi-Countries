@@ -31,6 +31,13 @@ router.get("/", async (req, res) => {
             return res.status(200).json(newCall);
         }
 
+        const {name} = req.query;
+        if( name ) {
+            let infoFiltrada = dataBase.filter( elemento => elemento.name === name)
+
+            res.status(200).json(infoFiltrada);
+        }
+
         res.status(200).json(dataBase);
     } catch (error) {
         console.log(error);
