@@ -18,7 +18,7 @@ module.exports = (sequelize) => {
         },
         
         difficult: {
-          type: DataTypes.JSON, 
+          type: DataTypes.ENUM ("1","2","3","4","5"), 
         },
         duration: {
             type: DataTypes.STRING, 

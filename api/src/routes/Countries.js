@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
                     subregion: e.subregion,
                     area: e.area,
                     population: e.population,
-                    // activity: e.activity?.map(e => e),
+                    activity: e.activity?.map(e => e),
                 };
             });
 
