@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const {Country} = require('../db');
+const {Country,Activity} = require('../db');
 const router = Router();
 const axios= require('axios')
 
@@ -20,14 +20,25 @@ router.get("/", async (req, res) => {
                     subregion: e.subregion,
                     area: e.area,
                     population: e.population,
-                    activity: e.activity?.map(e => e),
+                    // activity: e.activity?.map(e=>e),
                 };
+                
             });
 
             await Country.bulkCreate(infoMapeado);
 
 
-            const newCall = await Country.findAll();
+            const newCall = await Country.findAll(
+             {
+                    include: {
+                      model: Activity,
+                      attributes: [ "name", "difficult", "duration", "season",],
+                      through: {
+                        attributes: [],
+                      },
+                    },
+                  });
+                 
             return res.status(200).json(newCall);
         }
 
@@ -46,12 +57,24 @@ router.get("/", async (req, res) => {
     
 router.use("/:id", async(req, res) => {
     const {id}= req.params;
-    const dataCountries = await Country.findAll();
+    const dataCountries = await Country.findAll(
+        {
+            include: {
+              model: Activity,
+              attributes: [ "name", "difficult", "duration", "season",],
+              through: {
+                attributes: [],
+              },
+            },
+          });
+         
+    ;
     
     if (id){
         const nameFilter= dataCountries.filter(e=>e.id==id)
   
-        res.status(200).json(nameFilter);
+        res.status(200).json(nameFilter[0]);
     }
 })
 module.exports = router;
+
