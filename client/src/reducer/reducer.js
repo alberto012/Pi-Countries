@@ -4,6 +4,7 @@ const initialState = {
     allActivity:[],
     activity:[],
     detail: [],
+    loading: false
 }
 function rootReducer (state= initialState, action) {
     switch (action.type){
@@ -11,7 +12,8 @@ function rootReducer (state= initialState, action) {
         return{
             ...state,
             country: action.payload,
-            allCountry: action.payload
+            allCountry: action.payload,
+            loading:true
         }
         case "GET_ACT":
         return{
@@ -115,6 +117,10 @@ function rootReducer (state= initialState, action) {
                                   ...state,
                                   detail:action.payload
                                 }
+                                case "LOAD":
+                                  return{
+                                    loading: true,
+                                  }
 default :
 return state;
     }

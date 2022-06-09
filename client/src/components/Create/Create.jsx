@@ -2,32 +2,67 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getC, getA, createAct } from "../../actions/actions";
+import s from "./Create.module.css";
 
-function validar(estado) {
-  let error = {};
-  if (!estado.name|| typeof estado.name!=="string") {
-    error.name = " Pon un Caracter valido ";
-  }
-  if (!error.season) {
-    error.season = "te falto algo aca!";
-  }
-  if (!error.countries) {
-    error.countries = "wey ya";
-  }
-  if (!error.platforms) {
-    error.duration = "anda, elige uno";
-  }
-  if (!error.duration) {
-    error.duration = "se que puedes leerme muchachx, llena el cuadro";
-  }
+// function validar(estado) {
+//   let error = {};
+//   if (!estado.name || typeof estado.name !== "string"|| estado.name!=="") {
+//     error.name = " Pon un Caracter valido ";
+//   }else {
+//     error.name = "ok";
+//   }
+//   if (!error.season) {
+//     error.season = "te falto algo aca!";
+//   }else {
+//     error.season = "ok";
+//   }
+//   if (!error.countries) {
+//     error.countries = "wey ya";
+//   }else {
+//     error.countries = "ok";
+//   }
+  
+//   if (!error.duration) {
+//     error.duration = "se que puedes leerme muchachx, llena el cuadro";
+//   }else {
+//     error.duration = "ok";
+//   }
 
-  if (error.difficult < 0 || error.difficult > 5) {
-    error.difficult = "emmm nop, del 1 al 5";
-  } else {
-    error.submit = "ok";
-  }
-  return error;
+//   if (error.difficult < 0 || error.difficult > 5) {
+//     error.difficult = "emmm nop, del 1 al 5";
+//   } else {
+//     error.difficult = "ok";
+//   }
+//   if(error.name==="ok"
+//     // ==="ok" && error.name === "ok"&& error.duration==="ok" && error.season === "ok"
+//     ){
+//     error.submit= "okey"
+//   }else{error.submit= "no okey"}
+//   return error;
+// }
+const inputValidate = (estado) => {
+  let errors = {};
+  if(!isNaN(Number(estado.name))) {
+  errors.name = 'The name of the Activities cannot contain only numbers';
+} if(estado.name === "") {
+  errors.name = 'The name is required';
+} if(estado.name.length <2) {
+  errors.name = 'Name must contain at least four (2) characters';
+} 
+if(!estado.difficult.length) {
+  errors.difficult = `Difficult is required`;
+} 
+ if(estado.season.length === 0) {
+  errors.season = 'You must select at least one season';
+} if(!estado.duration || estado.duration === "") {
+  errors.duration = `Duration is required`;
+} if(estado.countries.length === 0) {
+  errors.countries = 'You must select at least one country';
 }
+console.log("error", errors)
+return errors;
+};
+
 
 export default function Create() {
   const dispatch = useDispatch();
@@ -35,7 +70,6 @@ export default function Create() {
   //   const countries = useSelector((state) => state.country);
   const activities = useSelector((state) => state.activity);
   const countries = useSelector((state) => state.country);
-
   const setArr = [];
 
   //   plataformas.map((e) => e.platforms?.map((e) => setArr.push(e)));
@@ -43,7 +77,7 @@ export default function Create() {
 
   const [estado, setEstado] = useState({
     name: "",
-    difficult: "",
+    difficult: [],
     duration: "",
     season: [],
     countries: [],
@@ -71,17 +105,22 @@ export default function Create() {
   //     });
   //   };
   function handleChange(e) {
+    e.preventDefault();
     setEstado({
       ...estado,
       [e.target.name]: e.target.value,
     });
-    SetErr(validar({...estado, name:  e.target.value}))
+    SetErr(inputValidate({ ...estado, [e.target.name]: e.target.value }));
   }
   function handleSelect(e) {
     setEstado({
       ...estado,
       countries: [...estado.countries, e.target.value],
     });
+    SetErr(inputValidate({
+      ...estado,
+     countries: [...estado.countries, e.target.value]
+    }));
   }
   function handleCheck(e) {
     if (e.target.checked) {
@@ -89,14 +128,16 @@ export default function Create() {
         ...estado,
         season: [...estado.season, e.target.value],
       });
-    }else if(e.target.name=== "duration"){ setEstado({
-      ...estado,
-      duration: e.target.value,
-    });} else{
+    } else if (e.target.name === "duration") {
       setEstado({
         ...estado,
-        season:estado.season?.filter(s=>s!== e.target.value)
-      })
+        duration: e.target.value,
+      });
+    } else {
+      setEstado({
+        ...estado,
+        season: estado.season?.filter((s) => s !== e.target.value),
+      });
     }
   }
   function handleCheckDif(e) {
@@ -105,11 +146,16 @@ export default function Create() {
       ...estado,
       difficult: e.target.value,
     });
-    SetErr(validar({...estado, difficult: e.target.value}))
+    SetErr(inputValidate({
+      ...estado,
+      difficult: [...estado.difficult, e.target.value],
+    }));
   }
 
   function handleSubmit(e) {
     e.preventDefault();
+if (Object.keys(err).length)
+{return alert("Faltan datos")}
     dispatch(createAct(estado));
     alert("Actividad Añadida");
     SetErr({});
@@ -129,23 +175,27 @@ export default function Create() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className= {s.all}>
       <form onSubmit={(e) => handleSubmit(e)}>
         <div>
           <div>
             <label>Nombre de Actividad: </label>
             <input
+              className={s.input}
               type="text"
               value={estado.name}
               name="name"
               onChange={(e) => handleChange(e)}
-              
             />
-           {err.name}
+            {err.name}
           </div>
           <div>
             <label>Dificultad: </label>
-            <select onChange={(e) => handleCheckDif(e)}>
+            <select className={s.input} onChange={(e) => handleCheckDif(e)}>
+                
+            <option   value={0} >
+                Seleccionar Dificultad
+              </option>
               <option value={1} onChange={(e) => handleCheckDif(e)}>
                 1
               </option>
@@ -161,12 +211,14 @@ export default function Create() {
               <option value={5} onChange={(e) => handleCheckDif(e)}>
                 5
               </option>
-             {err.difficult}
+              
             </select>
+            {err.difficult}
           </div>
           <div>
             <label>Duración: </label>
             <input
+              className={s.input}
               type="text"
               value={estado.duration}
               name="duration"
@@ -182,6 +234,7 @@ export default function Create() {
             <label>
               Primavera
               <input
+                className={s.input}
                 type="checkbox"
                 name={estado.season}
                 value="Spring"
@@ -191,6 +244,7 @@ export default function Create() {
             <label>
               Verano:
               <input
+                className={s.input}
                 type="checkbox"
                 name={estado.season}
                 value="Summer"
@@ -200,6 +254,7 @@ export default function Create() {
             <label>
               Otoño:
               <input
+                className={s.input}
                 type="checkbox"
                 name={estado.season}
                 value="Autumn"
@@ -209,6 +264,7 @@ export default function Create() {
             <label>
               Invierno:
               <input
+                className={s.input}
                 type="checkbox"
                 name={estado.season}
                 value="Winter"
@@ -219,10 +275,11 @@ export default function Create() {
 
             {/* {err.rating && <p>{err.rating}</p>} */}
           </div>
-
+ 
           <div>
             <label>Paises: </label>
-            <select onChange={(e) => handleSelect(e)}>
+
+            <select className={s.input} onChange={(e) => handleSelect(e)}>
               {countries?.map((e) => (
                 <option key={e.name} value={e.name}>
                   {e.name}
@@ -240,19 +297,13 @@ export default function Create() {
             </div>
           </div>
           <div
-          //   className={s.dis}
+            className={s.dis}
           >
-            <button
-            onClick={(e) => handleSubmit(e)}
-            >
+            <button className={s.button} onClick={(e) => handleSubmit(e)}>
               Crealo!
             </button>
             <Link to="/home">
-              <button
-              //   className={s.buttons}
-              >
-                Volver
-              </button>
+              <button className={s.button}>Volver</button>
             </Link>
           </div>
         </div>

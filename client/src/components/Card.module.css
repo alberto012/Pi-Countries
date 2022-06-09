@@ -1,98 +1,68 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  /* font-family: 'My Soul', cursive; */
+  font-family: "Metamorphous", cursive;
+}
+body {
+  height: 100vh;
+  display: grid;
+  place-items: center center;
+  background-size:2000px;
   
-  .body {
-    font-family: 'Montserrat', sans-serif;
-    background-color: #dbe2ef;
-    
-  }
-  
-  .card {
-    width: 400px;
-    overflow: hidden;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    border-radius: 15px;
-    box-shadow: 7px 13px 37px rgba(0, 0, 0, .6);
-  }
-  
-  header {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-    position: relative;
-  }
-  
-  header::before {
-    content: '';
-    position: absolute;
-    border-top: 30px solid transparent;
-    border-left: 400px solid white;
-    bottom: 0;
-  }
-  
-  header img {
-    width: 100%;
-    height: 199px;
-  }
-  
-  section {
-    padding: 10px;
-    overflow: hidden;
-    text-align: center;
-  }
-  
-  section h2 {
-    margin: .5em 0;
-  }
-  
-  section p {
-    margin: 1em 0;
-  }
-  
-  ul li {
-    list-style: none;
-    display: inline-block;
-    margin: .5em .2em;
-  }
-  
-  ul li a {
-    text-decoration: none;
-    color: white;
-    background: #314652;
-    width: 30px;
-    height: 30px;
-    line-height: 30px !important;
-    border-radius: 50%;
-    transition: all .3s ease-in-out;
-  }
-  
-  ul li a:hover {
-    transform: scale(1.2);
-  }
-  
-  footer {
-    width: 100%;
-    height: 80px;
-    background: #314652;
-    color: white;
-    position: relative;
-  }
-  
-  footer::before {
-    content: '';
-    position: absolute;
-    border-bottom: 30px solid transparent;
-    border-right: 400px solid white;
-    top: 0;
-  }
-  
-  footer p {
-    padding: 30px;
-  }
+
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 200px));
+  padding: 20px;
+  grid-gap: 40px;
+}
+.card:hover {
+  transform: scale(1.1);
+}
+.card {
+  background: url("https://media.istockphoto.com/photos/old-worn-papyrus-paper-with-contaminated-surface-picture-id1190803669?b=1&k=6&m=1190803669&s=170667a&w=0&h=G2HnBvbEvIpPq6IfHgVllDK0Rmnd3AVz0zLqeXSq-6o=");
+background-size: cover;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(97, 31, 31, 0.897);
+}
+.container {
+  position: relative;
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+}
+img {
+  width: 100%;
+  display: block;
+  border-radius: 20px 20px 0 0;
+}
+.container:after {
+  content: "";
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 20px 20px 0 0;
+  opacity: 0.7;
+}
+
+.details {
+  padding: 20px 10px;
+}
+.details > h3 {
+  color: #000000;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 18px;
+  margin: 10px 0 15px 0;
+}
+.details > p {
+  font-size: 15px;
+  line-height: 30px;
+  font-weight: 400;
+}

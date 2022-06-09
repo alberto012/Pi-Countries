@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {getDetail} from "../../actions/actions";
-// import style from "../css/Detail.module.css"
+import s from "./Detail.module.css"
 
 export default function Detail() {
   // const acti= useSelector((state) => state.activity)
@@ -18,7 +18,7 @@ export default function Detail() {
 
 console.log("estado de detail", states)
   return (
-    <div>
+    <div className={s.first}>
       <div>
             <div>
               <img src={states.flags} witdh="200px" height="200px" />
@@ -35,8 +35,9 @@ console.log("estado de detail", states)
                 {states.activities ? (
                   states.activities.map((act) => {
                     return (
-                      <div>
+                      <div key={act}>
                         <h4>
+                          
                           {" "}
                           Nombre: {act.name
                             ? act.name
@@ -74,7 +75,7 @@ console.log("estado de detail", states)
       </div>
 
       <Link to="/home">
-        <button> Volver al Home </button>
+        <button className={s.button} > Volver al Home </button>
       </Link>
     </div>
   );

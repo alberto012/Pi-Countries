@@ -5,16 +5,7 @@ const { Activity, Country } = require("../db");
 // Ruta para mostrar todos los activities
 
 router.get("/", async (req, res) => {
-  // const pais = await Activity.findAll ({
-  //     attributes:{exclude: ["id", "difficult", "duration", "season"]}
-  // });
-  // const act = pais.map((e) => e.activity);
-  // const newAct = new Set (act)
-  // console.log (act)
-  // console.log (newAct)
-  // const activity = Array.from (newAct)
-  // console.log (activity)
-  // res.status(200).send (activity)
+
   const paises = await Country.findAll({
     include: {
       model: Activity,
@@ -26,16 +17,17 @@ router.get("/", async (req, res) => {
   });
   const act = paises.map((e) => e);
   const newAct = new Set(act);
-//   console.log(act);
-//   console.log(newAct);
+
   const activity = Array.from(newAct);
-//   console.log(activity);
   res.status(200).send(activity);
 });
 
-//Ruta para crear los activities
 router.post("/", async (req, res) => {
   const { countries, name, difficult, duration, season } = req.body;
+  
+  if(!name || !difficult || !duration || !season  || !countries){
+    return 
+}
   const act = await Activity.create({
     name,
     difficult,

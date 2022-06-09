@@ -1,16 +1,22 @@
+
 .button {
-    color: black;
+    background-color: #ffffff2a;
+    font-weight: bold;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     border-radius: 10px;
-    background-color: #ffffff2a;
-    font-weight: bold;
     padding:2px;
+    margin: 2px;
+    margin-top:10px;
+    margin-bottom:50px;
+    border: 1px solid black;
+    font-size: 15px;
 
 }
 
 .button:hover {
     background-color: #5a5400; /* Green */
-    color: white;
+    color: rgb(219, 219, 219);
     border-radius: 10px;
+    
 }

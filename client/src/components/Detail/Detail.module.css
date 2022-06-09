@@ -1,0 +1,25 @@
+.first{
+    backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(100px);
+    font-family:'Bangers', cursive;
+    border: 1px solid rgb(0, 0, 0);
+  border-radius: 20px;
+  padding-bottom: 20px
+
+}
+.button {
+  color: black;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  border-radius: 10px;
+  background-color: #ffffff2a;
+  font-weight: bold;
+  padding:2px;
+
+}
+
+.button:hover {
+  background-color: #5a5400; /* Green */
+  color: white;
+  border-radius: 10px;
+}

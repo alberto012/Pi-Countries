@@ -44,7 +44,7 @@ router.get("/", async (req, res) => {
 
         const {name} = req.query;
         if( name ) {
-            let infoFiltrada = dataBase.filter( elemento => elemento.name === name)
+            let infoFiltrada = dataBase.filter( elemento => elemento.name.toLowerCase().includes(name.toLowerCase()))///////////
             res.status(200).json(infoFiltrada);
         }
 
@@ -55,7 +55,7 @@ router.get("/", async (req, res) => {
 
 
     
-router.use("/:id", async(req, res) => {
+router.get("/:id", async(req, res) => {
     const {id}= req.params;
     const dataCountries = await Country.findAll(
         {

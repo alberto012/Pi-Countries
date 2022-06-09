@@ -1,0 +1,40 @@
+.button {
+    background-color: #ffffff2a;
+    font-weight: bold;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    border-radius: 10px;
+    padding:2px;
+}
+
+.button:hover {
+    background-color: #5a5400; /* Green */
+    color: rgb(219, 219, 219);
+    border-radius: 10px;
+}
+.input {
+    background-color: #ffffff2a;
+    font-weight: bold;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    border-radius: 10px;
+}
+
+.input:hover {
+    background-color: #fdfdfd34; /* Green */
+    color: rgba(219, 219, 219, 0.568);
+    border-radius: 10px;
+}
+.all{
+    border: 1px solid black;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    width: 100vh;
+    height: 100%;
+}
+.dis{
+    display:flex;
+    justify-content: space-around;
+
+
+}

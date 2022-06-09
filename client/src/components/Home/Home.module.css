@@ -1,3 +1,41 @@
 .all{
-    background-color: rgba(76, 126, 126, 0.568);
+    /* background: url("https://cdn.wallpapersafari.com/95/15/t8IXUj.jpg"); */
+    color: black;
+    
+}
+.body{
+    
+    display: flex;
+    flex-direction: row;    
+    flex-wrap: wrap;
+    justify-content: space-evenly; 
+}
+.home{
+    width: 100%; 
+    min-height: 100vh;
+  /* background: url("https://cdn.wallpapersafari.com/95/15/t8IXUj.jpg"); */
+ text-decoration: none;
+ 
+}
+.button {
+    background-color: #ffffff2a;
+    font-weight: bold;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    border-radius: 10px;
+    padding:2px;
+    margin: 5px;
+    border: 1px solid black;
+
+}
+
+.button:hover {
+    background-color: #5a5400; /* Green */
+    color: rgb(219, 219, 219);
+    border-radius: 10px;
+    
+}
+.h1{
+    font-size: 50px;
+    text-shadow: 1px 1px 10px rgba(355, 255, 255, 5);
 }

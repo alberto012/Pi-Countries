@@ -1,10 +1,13 @@
 import axios from "axios";
 export function getC() {
+ 
   return async function (dispatch) {
+     dispatch(load) 
     var info = await axios.get("http://localhost:3001/countries");
     return dispatch({
       type: "GET_COUNTRY",
       payload: info.data,
+      
     });
   };
 }
@@ -15,23 +18,7 @@ export function createAct(payload) {
     return info;
   };
 }
-// export function getDetail(id) {
-//   return async function (dispatch) {
-//     return axios
-//       .get(`http://localhost:3001/countries/${id}`)
-//       .then((game) =>{
-//         console.log(game.data)
-//         dispatch(
-            
-//             game.data.name
-//               ? { type: "CARD_DETAIL", payload: game.data }
-//               : { type: "CARD_DETAIL", payload: game.data }
-//           )
-//       }
-//       );
-      
-//   };
-// }
+
 export function getDetail(id) {
   // aca sucede la conexion entre front y back
   return async function (dispatch) {
@@ -105,4 +92,10 @@ export function filterByOrder(payload) {
     type: "GET_ORDER",
     payload,
   };
+}
+export function load(){
+  return{
+    type: "LOAD",
+
+  }
 }
