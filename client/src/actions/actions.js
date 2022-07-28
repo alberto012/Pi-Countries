@@ -3,7 +3,7 @@ export function getC() {
  
   return async function (dispatch) {
      dispatch(load) 
-    var info = await axios.get("http://localhost:3001/countries");
+    var info = await axios.get("https://demo-002.herokuapp.com/countries");
     return dispatch({
       type: "GET_COUNTRY",
       payload: info.data,
@@ -13,7 +13,7 @@ export function getC() {
 }
 export function createAct(payload) {
   return async function (dispatch) {
-    const info = await axios.post("http://localhost:3001/activities", payload);
+    const info = await axios.post("https://demo-002.herokuapp.com/activities", payload);
     console.log(info);
     return info;
   };
@@ -24,7 +24,7 @@ export function getDetail(id) {
   return async function (dispatch) {
     try {
       let nombre = await axios.get(
-        `http://localhost:3001/countries/${id}`
+        `https://demo-002.herokuapp.com/countries/${id}`
       );
 console.log(nombre)
       return dispatch({
@@ -44,7 +44,7 @@ export function getNameC(name) {
   return async function (dispatch) {
     try {
       let count = await axios.get(
-        `http://localhost:3001/countries?name=` + name
+        `https://demo-002.herokuapp.com/countries?name=` + name
       );
 
       return dispatch({
@@ -61,7 +61,7 @@ export function getNameC(name) {
 }
 export function getA() {
   return async function (dispatch) {
-    let info = await axios.get("http://localhost:3001/activities");
+    let info = await axios.get("https://demo-002.herokuapp.com/activities");
     // console.log(info.data)
     return dispatch({
       type: "GET_ACT",
